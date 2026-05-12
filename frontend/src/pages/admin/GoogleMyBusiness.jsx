@@ -1138,7 +1138,7 @@ function ReviewStatsTab({ branchParam, businessName }) {
         setLoading(false);
       }
     },
-    [branchParam?.branch_id],
+    [branchParam],
   );
 
   useEffect(() => {
