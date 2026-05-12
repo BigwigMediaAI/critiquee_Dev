@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useBranch } from "../../context/BranchContext";
 import { reviewLinkApi } from "../../api";
 import { toast } from "sonner";
@@ -280,7 +280,10 @@ export default function ShareReviewLink() {
   const [detailSubmission, setDetailSubmission] = useState(null);
 
   const branchId = currentBranch?.id || "default";
-  const branchParam = currentBranch ? { branch_id: currentBranch.id } : {};
+  const branchParam = useMemo(
+    () => (currentBranch ? { branch_id: currentBranch.id } : {}),
+    [currentBranch],
+  );
   const reviewUrl = `${API_URL}/review/${branchId}`;
 
   const fetchSettings = useCallback(async () => {
@@ -298,7 +301,7 @@ export default function ShareReviewLink() {
     } finally {
       setLoading(false);
     }
-  }, [currentBranch?.id]);
+  }, [currentBranch]);
 
   const fetchSubmissions = useCallback(async () => {
     setSubLoading(true);
@@ -320,15 +323,7 @@ export default function ShareReviewLink() {
     } finally {
       setSubLoading(false);
     }
-  }, [
-    currentBranch?.id,
-    page,
-    perPage,
-    ratingFilter,
-    searchText,
-    dobFrom,
-    dobTo,
-  ]);
+  }, [currentBranch, page, perPage, ratingFilter, searchText, dobFrom, dobTo]);
 
   useEffect(() => {
     fetchSettings();
@@ -366,7 +361,7 @@ export default function ShareReviewLink() {
     } catch (err) {
       console.error("Failed to load custom platforms:", err);
     }
-  }, [currentBranch?.id]);
+  }, [currentBranch]);
 
   useEffect(() => {
     fetchPlatformOptions();
