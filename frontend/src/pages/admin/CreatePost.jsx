@@ -207,7 +207,7 @@ function ImageUploadArea({ images, setImages, disabled }) {
           data-testid="image-upload-area"
         >
           <Image size={18} />
-          <span className="text-sm">
+          <span className="text-sm break-words text-left">
             Click to add images (JPG, PNG, GIF, WebP)
           </span>
         </button>
@@ -616,7 +616,7 @@ export default function CreatePost() {
 
   return (
     <div className="space-y-5 max-w-4xl">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "Manrope" }}>
             {t("createPost.title")}
@@ -625,11 +625,11 @@ export default function CreatePost() {
             {t("createPost.subtitle")}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <Button
             variant="outline"
             size="sm"
-            className="gap-2"
+            className="gap-2 w-full sm:w-auto justify-center"
             onClick={() => setShowPreview(true)}
             data-testid="open-preview-btn"
           >
@@ -654,7 +654,7 @@ export default function CreatePost() {
         <div className="lg:col-span-2 space-y-4">
           <Card>
             <CardHeader className="pb-3">
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <CardTitle
                   className="text-base flex items-center gap-2"
                   style={{ fontFamily: "Manrope" }}
@@ -664,7 +664,7 @@ export default function CreatePost() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="gap-2 border-primary/30 text-primary hover:bg-primary/5"
+                  className="gap-2 border-primary/30 text-primary hover:bg-primary/5 w-full sm:w-auto justify-center"
                   onClick={() => setShowAICompose(true)}
                   disabled={isProcessing}
                   data-testid="open-ai-compose-btn"
@@ -725,10 +725,10 @@ export default function CreatePost() {
               )}
 
               {/* Schedule toggle */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border">
                 <button
                   onClick={() => setScheduleMode(false)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`w-full sm:w-auto justify-center flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     !scheduleMode
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -823,7 +823,7 @@ export default function CreatePost() {
                         key={platform}
                         className="flex items-center justify-between py-1.5"
                       >
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           <PlatformIcon platform={platform} size={16} />
                           <span className="text-sm text-foreground">
                             {getPlatformLabel(platform)}
